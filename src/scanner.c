@@ -8,15 +8,15 @@ typedef enum {
     MULTILINE_LITERAL_STRING_END,
 } TokenType;
 
-void *tree_sitter_toml_external_scanner_create() { return NULL; }
+void *tree_sitter_jjconfig_external_scanner_create() { return NULL; }
 
-void tree_sitter_toml_external_scanner_destroy(void *payload) {}
+void tree_sitter_jjconfig_external_scanner_destroy(void *payload) {}
 
-unsigned tree_sitter_toml_external_scanner_serialize(void *payload, char *buffer) { return 0; }
+unsigned tree_sitter_jjconfig_external_scanner_serialize(void *payload, char *buffer) { return 0; }
 
-void tree_sitter_toml_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {}
+void tree_sitter_jjconfig_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {}
 
-bool tree_sitter_toml_external_scanner_scan_multiline_string_end(TSLexer *lexer, const bool *valid_symbols,
+bool tree_sitter_jjconfig_external_scanner_scan_multiline_string_end(TSLexer *lexer, const bool *valid_symbols,
                                                                  int32_t delimiter, TokenType content_symbol,
                                                                  TokenType end_symbol) {
     if (!valid_symbols[end_symbol] || lexer->lookahead != delimiter) {
@@ -51,10 +51,10 @@ bool tree_sitter_toml_external_scanner_scan_multiline_string_end(TSLexer *lexer,
     return true;
 }
 
-bool tree_sitter_toml_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
-    if (tree_sitter_toml_external_scanner_scan_multiline_string_end(
+bool tree_sitter_jjconfig_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+    if (tree_sitter_jjconfig_external_scanner_scan_multiline_string_end(
             lexer, valid_symbols, '"', MULTILINE_BASIC_STRING_CONTENT, MULTILINE_BASIC_STRING_END) ||
-        tree_sitter_toml_external_scanner_scan_multiline_string_end(
+        tree_sitter_jjconfig_external_scanner_scan_multiline_string_end(
             lexer, valid_symbols, '\'', MULTILINE_LITERAL_STRING_CONTENT, MULTILINE_LITERAL_STRING_END)) {
         return true;
     }
