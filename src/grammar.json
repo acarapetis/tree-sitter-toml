@@ -323,26 +323,31 @@
           "value": "\""
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "REPEAT1",
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "IMMEDIATE_TOKEN",
                   "content": {
-                    "type": "PATTERN",
-                    "value": "[^\\x00-\\x08\\x0a-\\x1f\\x22\\x5c\\x7f]"
+                    "type": "REPEAT1",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[^\\x00-\\x08\\x0a-\\x1f\\x22\\x5c\\x7f]"
+                    }
                   }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "escape_sequence"
                 }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "escape_sequence"
-              }
-            ]
-          }
+              ]
+            }
+          },
+          "named": true,
+          "value": "string_content"
         },
         {
           "type": "IMMEDIATE_TOKEN",
@@ -361,46 +366,51 @@
           "value": "\"\"\""
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "REPEAT1",
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "REPEAT1",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[^\\x00-\\x08\\x0a-\\x1f\\x22\\x5c\\x7f]"
+                    }
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_multiline_basic_string_content"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^\\x00-\\x08\\x0a-\\x1f\\x22\\x5c\\x7f]"
+                    "value": "\\r?\\n"
                   }
-                }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_multiline_basic_string_content"
-              },
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "\\r?\\n"
-                }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "escape_sequence"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_escape_line_ending"
                 },
-                "named": true,
-                "value": "escape_sequence"
-              }
-            ]
-          }
+                {
+                  "type": "SYMBOL",
+                  "name": "escape_sequence"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_escape_line_ending"
+                  },
+                  "named": true,
+                  "value": "escape_sequence"
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "string_content"
         },
         {
           "type": "SYMBOL",
@@ -439,22 +449,27 @@
           "value": "'"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "REPEAT1",
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "[^\\x00-\\x08\\x0a-\\x1f\\x27\\x7f]"
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^\\x00-\\x08\\x0a-\\x1f\\x27\\x7f]"
+                  }
                 }
+              },
+              {
+                "type": "BLANK"
               }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+            ]
+          },
+          "named": true,
+          "value": "string_content"
         },
         {
           "type": "IMMEDIATE_TOKEN",
@@ -473,33 +488,38 @@
           "value": "'''"
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "REPEAT1",
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "REPEAT1",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[^\\x00-\\x08\\x0a-\\x1f\\x27\\x7f]"
+                    }
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_multiline_literal_string_content"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^\\x00-\\x08\\x0a-\\x1f\\x27\\x7f]"
+                    "value": "\\r?\\n"
                   }
                 }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_multiline_literal_string_content"
-              },
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "\\r?\\n"
-                }
-              }
-            ]
-          }
+              ]
+            }
+          },
+          "named": true,
+          "value": "string_content"
         },
         {
           "type": "SYMBOL",

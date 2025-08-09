@@ -27,19 +27,22 @@ str3 = "Name\tJos\u00E9\nLoc\tSF."
 (document
   (pair
     (bare_key)
-    (string))
+    (string
+      (string_content)))
   (pair
     (bare_key)
     (string
-      (escape_sequence)
-      (escape_sequence)))
+      (string_content
+        (escape_sequence)
+        (escape_sequence))))
   (pair
     (bare_key)
     (string
-      (escape_sequence)
-      (escape_sequence)
-      (escape_sequence)
-      (escape_sequence))))
+      (string_content
+        (escape_sequence)
+        (escape_sequence)
+        (escape_sequence)
+        (escape_sequence)))))
 
 =========================
 Strings: multi-line basic
@@ -60,14 +63,16 @@ str2 = """\
 (document
   (pair
     (bare_key)
-    (string))
+    (string
+      (string_content)))
   (pair
     (bare_key)
     (string
-      (escape_sequence)
-      (escape_sequence)
-      (escape_sequence)
-      (escape_sequence))))
+      (string_content
+        (escape_sequence)
+        (escape_sequence)
+        (escape_sequence)
+        (escape_sequence)))))
 
 ================
 Strings: literal
@@ -83,16 +88,20 @@ regex = '<\i\c*\s*>'
 (document
   (pair
     (bare_key)
-    (string))
+    (string
+      (string_content)))
   (pair
     (bare_key)
-    (string))
+    (string
+      (string_content)))
   (pair
     (bare_key)
-    (string))
+    (string
+      (string_content)))
   (pair
     (bare_key)
-    (string)))
+    (string
+      (string_content))))
 
 ===========================
 Strings: multi-line literal
@@ -111,10 +120,12 @@ is preserved.
 (document
   (pair
     (bare_key)
-    (string))
+    (string
+      (string_content)))
   (pair
     (bare_key)
-    (string)))
+    (string
+      (string_content))))
 
 =================
 Numbers: integers

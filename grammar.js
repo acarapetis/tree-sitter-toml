@@ -92,29 +92,35 @@ module.exports = grammar({
     _basic_string: $ =>
       seq(
         '"',
-        repeat(
-          choice(
-            token.immediate(
-              repeat1(/[^\x00-\x08\x0a-\x1f\x22\x5c\x7f]/),
+        alias(
+          repeat(
+            choice(
+              token.immediate(
+                repeat1(/[^\x00-\x08\x0a-\x1f\x22\x5c\x7f]/),
+              ),
+              $.escape_sequence,
             ),
-            $.escape_sequence,
           ),
+          $.string_content
         ),
         token.immediate('"'),
       ),
     _multiline_basic_string: $ =>
       seq(
         '"""',
-        repeat(
-          choice(
-            token.immediate(
-              repeat1(/[^\x00-\x08\x0a-\x1f\x22\x5c\x7f]/),
+        alias(
+          repeat(
+            choice(
+              token.immediate(
+                repeat1(/[^\x00-\x08\x0a-\x1f\x22\x5c\x7f]/),
+              ),
+              $._multiline_basic_string_content,
+              token.immediate(newline),
+              $.escape_sequence,
+              alias($._escape_line_ending, $.escape_sequence),
             ),
-            $._multiline_basic_string_content,
-            token.immediate(newline),
-            $.escape_sequence,
-            alias($._escape_line_ending, $.escape_sequence),
           ),
+          $.string_content
         ),
         $._multiline_basic_string_end,
       ),
@@ -124,24 +130,30 @@ module.exports = grammar({
     _literal_string: $ =>
       seq(
         '\'',
-        optional(
-          token.immediate(
-            repeat1(/[^\x00-\x08\x0a-\x1f\x27\x7f]/),
+        alias(
+          optional(
+            token.immediate(
+              repeat1(/[^\x00-\x08\x0a-\x1f\x27\x7f]/),
+            ),
           ),
+          $.string_content
         ),
         token.immediate('\''),
       ),
     _multiline_literal_string: $ =>
       seq(
         '\'\'\'',
-        repeat(
-          choice(
-            token.immediate(
-              repeat1(/[^\x00-\x08\x0a-\x1f\x27\x7f]/),
+        alias(
+          repeat(
+            choice(
+              token.immediate(
+                repeat1(/[^\x00-\x08\x0a-\x1f\x27\x7f]/),
+              ),
+              $._multiline_literal_string_content,
+              token.immediate(newline),
             ),
-            $._multiline_literal_string_content,
-            token.immediate(newline),
           ),
+          $.string_content
         ),
         $._multiline_literal_string_end,
       ),
